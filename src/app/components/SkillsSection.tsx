@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
+import {
   SiReact,
   SiNextdotjs,
   SiTypescript,
@@ -12,9 +12,20 @@ import {
   SiJenkins,
   SiJira,
   SiConfluence,
-  SiGit
+  SiGit,
+  SiSpring,
+  SiPostgresql,
+  SiMysql,
+  SiDocker,
+  SiHibernate,
+  SiAmazon,
+  SiApachemaven,
+  SiRabbitmq
 } from "react-icons/si";
-import { FiMonitor } from "react-icons/fi";
+
+import { FiMonitor } from "react-icons/fi"; // fallback icon
+import { FaJava } from "react-icons/fa";
+
 import { SKILLS_SECTION } from "../../constants/portfolio";
 
 // Icon mapping
@@ -26,11 +37,20 @@ const iconMap = {
   Tailwind: SiTailwindcss,
   Mobile: SiAndroid,
   Redux: SiRedux,
-  Playwright: FiMonitor,
   Jenkins: SiJenkins,
   Jira: SiJira,
   Confluence: SiConfluence,
   Git: SiGit,
+  Java: FaJava,
+  Spring: SiSpring,
+  PostgreSQL: SiPostgresql,
+  MySQL: SiMysql,
+  Docker: SiDocker,
+  Hibernate: SiHibernate,
+  AWS: SiAmazon,
+  Maven: SiApachemaven,
+  RabbitMQ: SiRabbitmq,
+  Playwright: FiMonitor // No specific icon, fallback to monitor
 };
 
 export default function SkillsSection() {
@@ -51,7 +71,8 @@ export default function SkillsSection() {
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {SKILLS_SECTION.skills.map((skill, index) => {
-            const IconComponent = iconMap[skill.icon as keyof typeof iconMap];
+            const IconComponent = iconMap[skill.icon as keyof typeof iconMap] || FiMonitor;
+
             return (
               <motion.div
                 key={skill.name}

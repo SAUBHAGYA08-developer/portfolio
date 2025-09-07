@@ -1,12 +1,12 @@
 
 const currentYear=new Date().getFullYear()
 
-export const RESUME_URL='https://drive.google.com/file/d/11RPw8uLS3hqq3dfx4EGrHKaNVGW1Z96j/view'
+export const RESUME_URL='https://drive.google.com/file/d/11Wu0bNJi8cCJmgl3RTlsIuOSO2CDL3rI/view'
 // Hero Section Constants
 export const HERO_SECTION = {
-  name: "Shivam",
-  initials: "SR",
-  title: "Frontend Developer & Creative Technologist",
+  name: "Saubhagya",
+  initials: "SS",
+  title: "Backend Developer & Creative Technologist",
   description: "I build innovative web applications that combine cutting-edge technology with beautiful design. Passionate about creating seamless user experiences and scalable solutions.",
   primaryButton: "View My Work",
   secondaryButton: "Download CV"
@@ -20,12 +20,12 @@ export const ABOUT_SECTION = {
   additionalDescription: "When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community. I believe in continuous learning and staying up-to-date with the latest industry trends.",
   stats: [
     {
-      number: "4+",
+      number: "2+",
       label: "Years Experience",
       color: "text-blue-400"
     },
     {
-      number: "50+",
+      number: "150+",
       label: "Projects Completed",
       color: "text-purple-400"
     }
@@ -37,21 +37,21 @@ export const ABOUT_SECTION = {
 };
 
 // Skills Section Constants
+// Skills Section Constants
 export const SKILLS_SECTION = {
   title: "Skills & Technologies",
   skills: [
-    { name: "React", icon: "React", color: "text-blue-500" },
-    { name: "Next.js", icon: "Nextjs", color: "text-white" },
-    { name: "TypeScript", icon: "TypeScript", color: "text-blue-600" },
-    { name: "Strapi CMS", icon: "Strapi", color: "text-purple-600" },
-    { name: "Tailwind CSS", icon: "Tailwind", color: "text-cyan-500" },
-    { name: "Redux", icon: "Redux", color: "text-purple-400" },
-    { name: "Playwright", icon: "Playwright", color: "text-green-500" },
+    { name: "Java", icon: "Java", color: "text-red-600" },
+    { name: "Spring Boot", icon: "Spring", color: "text-green-500" },
+    { name: "Hibernate", icon: "Hibernate", color: "text-purple-600" },
+    { name: "MySQL", icon: "MySQL", color: "text-yellow-500" },
+    { name: "PostgreSQL", icon: "PostgreSQL", color: "text-blue-500" },
+    { name: "REST APIs", icon: "Api", color: "text-blue-400" }, // Will use FiMonitor as fallback
+    { name: "Docker", icon: "Docker", color: "text-blue-600" },
     { name: "Jenkins", icon: "Jenkins", color: "text-red-500" },
-    { name: "Jira", icon: "Jira", color: "text-blue-400" },
-    { name: "Confluence", icon: "Confluence", color: "text-blue-600" },
     { name: "Git", icon: "Git", color: "text-orange-500" },
-    { name: "Mobile Dev", icon: "Mobile", color: "text-purple-500" }
+    { name: "Maven", icon: "Maven", color: "text-indigo-500" },
+    { name: "AWS", icon: "AWS", color: "text-orange-400" }
   ]
 };
 
@@ -106,20 +106,20 @@ export const CONTACT_SECTION = {
   socialLinks: [
     {
       type: "email",
-      label: "shivamranjan81@gmail.com",
-      href: "mailto:shivamranjan81@gmail.com",
+      label: "shuklasaubhagya795@gmail.com",
+      href: "mailto:shuklasaubhagya795@gmail.com",
       icon: "Mail"
     },
     {
       type: "github",
-      label: "github.com/shivam8100",
-      href: "https://github.com/shivam8100",
+      label: "github.com/saubhagya08",
+      href: "https://github.com/saubhagya08",
       icon: "Github"
     },
     {
       type: "linkedin",
-      label: "linkedin/shivam-ranjan",
-      href: "https://www.linkedin.com/in/shivam-ranjan-b57a28150/",
+      label: "linkedin/saubhagya-shukla",
+      href: "https://www.linkedin.com/in/saubhagya08/",
       icon: "Linkedin"
     }
   ],
@@ -136,12 +136,12 @@ export const CONTACT_SECTION = {
 
 // Footer Constants
 export const FOOTER = {
-  text: `© ${currentYear} Shivam Ranjan. Built with Next.js, Tailwind CSS, and lots of ☕`
+  text: `© ${currentYear} Saubhagya Shukla. Built with Next.js, Tailwind CSS, and lots of ☕`
 };
 
 // Navigation Constants
 export const NAVIGATION = {
-  brand: "Shivam Ranjan",
+  brand: "Saubhagya Shukla",
   sections: ["home", "about", "skills", "projects", "contact"]
 };
 

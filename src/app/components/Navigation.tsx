@@ -33,7 +33,7 @@ export default function Navigation({
           >
             <Image
               src="/my-logo.png"
-              alt="Shivam Ranjan Logo"
+              alt="Saubhagya Shukla Logo"
               width={100}
               height={20}
               priority
