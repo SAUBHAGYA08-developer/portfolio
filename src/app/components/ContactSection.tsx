@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { SiLeetcode } from "react-icons/si";
 import { CONTACT_SECTION } from "../../constants/portfolio";
 import { useState, useRef } from "react";
 
@@ -10,6 +11,7 @@ const iconMap = {
   Mail: FiMail,
   Github: FiGithub,
   Linkedin: FiLinkedin,
+  Leetcode: SiLeetcode,   // added Leetcode icon here
 };
 
 export default function ContactSection() {

@@ -16,7 +16,7 @@ export const HERO_SECTION = {
 export const ABOUT_SECTION = {
   title: "About Me",
   subtitle: "Passionate Developer with a Creative Edge",
-  description: "I'm a frontend developer with over 4 years of experience building web applications. I specialize in React, Next.js, TypeScript, and Tailwind CSS, creating scalable and maintainable code that delivers exceptional user experiences.",
+  description: "Backend Developer with 2+ years of professional experience, currently working at TRUEMEDS, where I contribute to building and deploying scalable web applications. Proficient in Java, Spring Boot, Microservices, Hibernate, JPA, and MySQL. Experienced in integrating Redis for high-performance caching and managing CI/CD pipelines using Jenkins and Git. I work extensively with AWS services including EC2, RDS, SQS, MSK, Lambda, CloudWatch, and S3 to ensure reliable, cloud-native deployments. From development to deployment, I handle the full lifecycle of backend systems. Explore my projects below and feel free to reach out for collaboration opportunities.",
   additionalDescription: "When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community. I believe in continuous learning and staying up-to-date with the latest industry trends.",
   stats: [
     {
@@ -25,7 +25,7 @@ export const ABOUT_SECTION = {
       color: "text-blue-400"
     },
     {
-      number: "150+",
+      number: "15",
       label: "Projects Completed",
       color: "text-purple-400"
     }
@@ -41,18 +41,28 @@ export const ABOUT_SECTION = {
 export const SKILLS_SECTION = {
   title: "Skills & Technologies",
   skills: [
-    { name: "Java", icon: "Java", color: "text-red-600" },
-    { name: "Spring Boot", icon: "Spring", color: "text-green-500" },
-    { name: "Hibernate", icon: "Hibernate", color: "text-purple-600" },
-    { name: "MySQL", icon: "MySQL", color: "text-yellow-500" },
-    { name: "PostgreSQL", icon: "PostgreSQL", color: "text-blue-500" },
-    { name: "REST APIs", icon: "Api", color: "text-blue-400" }, // Will use FiMonitor as fallback
-    { name: "Docker", icon: "Docker", color: "text-blue-600" },
-    { name: "Jenkins", icon: "Jenkins", color: "text-red-500" },
-    { name: "Git", icon: "Git", color: "text-orange-500" },
-    { name: "Maven", icon: "Maven", color: "text-indigo-500" },
-    { name: "AWS", icon: "AWS", color: "text-orange-400" }
-  ]
+  { name: "Java", icon: "Java", color: "text-red-600" },
+  { name: "Spring Boot", icon: "Spring", color: "text-green-500" },
+  { name: "Microservices", icon: "Microservices", color: "text-blue-500" },
+  { name: "Hibernate", icon: "Hibernate", color: "text-purple-600" },
+  { name: "JPA", icon: "Database", color: "text-purple-400" },
+  { name: "MySQL", icon: "MySQL", color: "text-yellow-500" },
+  { name: "Redshift", icon: "Redshift", color: "text-blue-500" },
+  { name: "Redis", icon: "Redis", color: "text-red-500" },
+  { name: "REST APIs", icon: "Api", color: "text-blue-400" },
+  { name: "WebSocket", icon: "WebSocket", color: "text-pink-500" },
+  { name: "Docker", icon: "Docker", color: "text-blue-600" },
+  { name: "Jenkins", icon: "Jenkins", color: "text-red-500" },
+  { name: "Git", icon: "Git", color: "text-orange-500" },
+  { name: "Maven", icon: "Maven", color: "text-indigo-500" },
+  { name: "AWS EC2", icon: "AWS", color: "text-orange-400" },
+  { name: "AWS RDS", icon: "AWS", color: "text-orange-400" },
+  { name: "AWS S3", icon: "AWS", color: "text-orange-400" },
+  { name: "AWS Lambda", icon: "AWS", color: "text-orange-400" },
+  { name: "AWS SQS", icon: "AWS", color: "text-orange-400" },
+  { name: "AWS MSK", icon: "AWS", color: "text-orange-400" },
+  { name: "AWS CloudWatch", icon: "AWS", color: "text-orange-400" }
+]
 };
 
 // Projects Section Constants
@@ -60,41 +70,78 @@ export const PROJECTS_SECTION = {
   title: "Featured Projects",
   projects: [
     {
-      title: "E-Pharma, E-Commerce Platform websites",
-      description: "E-commerce Platform with React, Node.js,next js and Stripe integration",
-      tech: ["React", "Node.js", "Nextjs", "Stripe"],
-      image: "/api/placeholder/400/250",
-      link: "#"
-    },
+  title: "Inventory-Based Warehouse Assignment & Real-Time Pricing Microservices",
+  description: "Built Spring Boot microservices to optimize warehouse selection based on real-time inventory, reducing delivery time. Developed a dynamic pricing engine using 'Most Common Price' logic to ensure accurate SKU pricing. Implemented Kafka via AWS MSK, Redis locks for concurrency, and partitioned databases for scalability.",
+  tech: [
+    "Java",
+    "Spring Boot",
+    "Microservices",
+    "AWS MSK",
+    "AWS Lambda",
+    "Redis",
+    "Redisson Lock",
+    "Database Partitioning",
+    "MySQL"
+  ],
+  image: "/api/placeholder/400/250",
+  link: "#"
+},
+{
+    title: "Doctor & Calling Agent Analytics Dashboard",
+    description: "Implemented nightly ETL to dump complete data sets for doctors and calling agents into Amazon Redshift, enabling fast, scalable dashboards that offload load from the main MySQL database. Integrated with Spring Boot microservices for seamless data synchronization and timely insights.",
+    tech: ["Java", "Spring Boot", "MySQL", "Amazon Redshift", "AWS", "ETL"],
+    image: "/api/placeholder/400/250", // Replace with your project image path
+    link: "#" // Add project URL or demo link if available
+  },
     {
-      title: "Different  Management Portals",
-      description: "Real-time collaborative task management with call and B2C portal functionality",
-      tech: ["Next.js", "React.js", "Tailwind","Firebase"],
-      image: "/api/placeholder/400/250",
-      link: "#"
-    },
-
-    {
-      title: "B2C website for a company",
-      description: "Modern, responsive portfolio with animations and dark theme",
-      tech: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
-      image: "/api/placeholder/400/250",
-      link: "https://3daily.ai/"
-    },
-    {
-      title: "Pluto Tv",
-      description: "Modern, responsive website  with On demand live streaming and contents",
-      tech: ["React", "Redux toolkit", "Tailwind CSS", "TypeScript"],
-      image: "/api/placeholder/400/250",
-      link: "https://pluto.tv"
-    },
-    {
-      title: "Portfolio Website",
-      description: "Modern, responsive portfolio with animations and dark theme",
-      tech: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
-      image: "/api/placeholder/400/250",
-      link: "#"
-    },
+  title: "Spring Boot Microservice for Order Confirmation Call Automation",
+  description: "Developed a unified call automation microservice that combines doctor consultation and substitute pitching in a single call, integrated with Tata Tele. This reduced call costs and increased daily order confirmations using the same resources. Built with Redis, AWS SQS, and event-driven flows via AWS Lambda.",
+  tech: [
+    "Java",
+    "Spring Boot",
+    "Hibernate",
+    "MySQL",
+    "Redis",
+    "AWS Lambda",
+    "AWS SQS",
+    "Tata Tele Integration"
+  ],
+  image: "/api/placeholder/400/250",
+  link: "#"
+},
+{
+  title: "Analytics and Campaign Integration Platform with Mixpanel, CleverTap, Flyy, and AppsFlyer",
+  description: "Implemented a robust Java Spring Boot backend to integrate multiple marketing and analytics platforms—Mixpanel for user analytics, CleverTap for event-driven campaign management, Flyy for contest execution, and AppsFlyer for app install and conversion tracking. Utilizing MySQL, Hibernate, and JPA, the system enables seamless data flow and real-time event tracking to drive customer engagement and optimize marketing strategies.",
+  tech: [
+    "Java",
+    "Spring Boot",
+    "MySQL",
+    "Hibernate",
+    "JPA",
+    "Mixpanel (Analytics)",
+    "CleverTap (Campaign Management)",
+    "Flyy (Contest Platform)",
+    "AppsFlyer (Attribution & Event Tracking)"
+  ],
+  image: "/api/placeholder/400/250",
+  link: "#"
+},
+{
+  title: "Centralized Notification Microservice for Asynchronous Push, SMS, and WhatsApp Delivery",
+  description: "Designed and developed a scalable Spring Boot microservice to centralize and asynchronously process notifications via push (using Firebase), SMS, and WhatsApp (integrated with Gupshup). Leveraging AWS MSK for messaging and AWS Lambda for event-driven processing, the system significantly reduces API response time and eases system pressure by offloading notification delivery tasks. Previously, SMS and other notifications caused bottlenecks before going live; this solution optimizes throughput and consolidates all notification logic in one place.",
+  tech: [
+    "Java",
+    "Spring Boot",
+    "AWS MSK",
+    "AWS Lambda",
+    "Gupshup API (SMS & WhatsApp)",
+    "Firebase Cloud Messaging (Push Notifications)",
+    "Asynchronous Messaging",
+    "Microservices"
+  ],
+  image: "/api/placeholder/400/250",
+  link: "#"
+}
   ]
 };
 
@@ -122,6 +169,12 @@ export const CONTACT_SECTION = {
       href: "https://www.linkedin.com/in/saubhagya08/",
       icon: "Linkedin"
     }
+    // {
+    //   type: "leetcode",
+    //   label: "leetcode/Saybhagya_08",
+    //   href: "https://leetcode.com/u/Saybhagya_08/",
+    //   icon: "LeetCode"
+    // }
   ],
   form: {
     title: "Send a Message",

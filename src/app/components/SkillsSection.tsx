@@ -14,20 +14,23 @@ import {
   SiConfluence,
   SiGit,
   SiSpring,
-  SiPostgresql,
+  SiAmazonredshift,
   SiMysql,
   SiDocker,
   SiHibernate,
   SiAmazon,
   SiApachemaven,
-  SiRabbitmq
+  SiRabbitmq,
+  SiRedis,
+  SiApachekafka,
+  // SiAwsamplify,
+  SiPostgresql,
 } from "react-icons/si";
 
 import { FiMonitor } from "react-icons/fi"; // fallback icon
 import { FaJava } from "react-icons/fa";
 
 import { SKILLS_SECTION } from "../../constants/portfolio";
-
 // Icon mapping
 const iconMap = {
   React: SiReact,
@@ -43,15 +46,24 @@ const iconMap = {
   Git: SiGit,
   Java: FaJava,
   Spring: SiSpring,
-  PostgreSQL: SiPostgresql,
+  Redshift: SiAmazonredshift,
   MySQL: SiMysql,
+  PostgreSQL: SiPostgresql,
   Docker: SiDocker,
   Hibernate: SiHibernate,
   AWS: SiAmazon,
   Maven: SiApachemaven,
   RabbitMQ: SiRabbitmq,
-  Playwright: FiMonitor // No specific icon, fallback to monitor
+  Redis: SiRedis,
+  Kafka: SiApachekafka,
+  MSK: SiApachekafka, // MSK = Managed Kafka, using kafka icon
+  Lambda: FiMonitor, // No official Lambda icon in react-icons, fallback
+  SQS: FiMonitor,    // Same for SQS (AWS Simple Queue Service)
+  CloudWatch: FiMonitor,
+  S3: FiMonitor,
+  Playwright: FiMonitor, // existing fallback
 };
+
 
 export default function SkillsSection() {
   return (
