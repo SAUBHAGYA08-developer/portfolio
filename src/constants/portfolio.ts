@@ -160,7 +160,7 @@ export const CONTACT_SECTION = {
     {
       type: "github",
       label: "github.com/saubhagya08",
-      href: "https://github.com/saubhagya08",
+      href: "https://github.com/SAUBHAGYA08-developer",
       icon: "Github"
     },
     {
