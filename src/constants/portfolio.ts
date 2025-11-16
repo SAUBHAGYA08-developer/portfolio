@@ -1,7 +1,7 @@
 
 const currentYear=new Date().getFullYear()
 
-export const RESUME_URL='https://drive.google.com/file/d/11Wu0bNJi8cCJmgl3RTlsIuOSO2CDL3rI/view'
+export const RESUME_URL='https://drive.google.com/file/d/1OSvcSujPcsWBeSEEMsn4wfQDTeJMXXHM/view'
 // Hero Section Constants
 export const HERO_SECTION = {
   name: "Saubhagya",
