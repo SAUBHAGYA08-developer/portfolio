@@ -65,14 +65,6 @@ export default function Home() {
 
   return (
     <div style={{ background: "var(--bg)" }}>
-      {/* Hidden static form for Netlify Forms detection at build time */}
-      <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <input type="text" name="company" />
-        <textarea name="message" />
-        <input name="bot-field" />
-      </form>
       <Navigation
         activeSection={activeSection}
         onNavigate={scrollToSection}

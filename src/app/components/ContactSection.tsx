@@ -39,7 +39,7 @@ export default function ContactSection() {
     e.preventDefault();
     setStatus("sending");
     try {
-      const res = await fetch("/", {
+      const res = await fetch("/__forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
@@ -199,14 +199,9 @@ export default function ContactSection() {
               name="contact"
               onSubmit={handleSubmit}
               className="space-y-4"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
             >
-              {/* Netlify bot protection */}
               <input type="hidden" name="form-name" value="contact" />
-              <p className="hidden">
-                <label>Don&apos;t fill this out: <input name="bot-field" /></label>
-              </p>
+              <input type="hidden" name="bot-field" />
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs text-slate-500 mb-1.5 ml-1">
