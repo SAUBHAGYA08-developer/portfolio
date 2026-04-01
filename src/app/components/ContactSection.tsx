@@ -27,7 +27,7 @@ export default function ContactSection() {
     company: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -35,21 +35,30 @@ export default function ContactSection() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const subject = encodeURIComponent(
-      `Portfolio Contact${formData.company ? ` — ${formData.company}` : ""} from ${formData.name}`
-    );
-    const body = encodeURIComponent(
-      `Hi Saubhagya,\n\n${formData.message}\n\n---\nName: ${formData.name}\nEmail: ${formData.email}${formData.company ? `\nCompany: ${formData.company}` : ""}`
-    );
-
-    window.location.href = `mailto:${PERSONAL.email}?subject=${subject}&body=${body}`;
-
-    setStatus("success");
-    setFormData({ name: "", email: "", company: "", message: "" });
-    setTimeout(() => setStatus("idle"), 5000);
+    setStatus("sending");
+    try {
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          "form-name": "contact",
+          ...formData,
+        }).toString(),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", company: "", message: "" });
+        setTimeout(() => setStatus("idle"), 6000);
+      } else {
+        setStatus("error");
+        setTimeout(() => setStatus("idle"), 5000);
+      }
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   const inputClass =
@@ -186,7 +195,18 @@ export default function ContactSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form
+              name="contact"
+              onSubmit={handleSubmit}
+              className="space-y-4"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+            >
+              {/* Netlify bot protection */}
+              <input type="hidden" name="form-name" value="contact" />
+              <p className="hidden">
+                <label>Don&apos;t fill this out: <input name="bot-field" /></label>
+              </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs text-slate-500 mb-1.5 ml-1">
@@ -253,11 +273,11 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                disabled={status === "success"}
+                disabled={status === "sending" || status === "success"}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
               >
                 <FiSend size={14} />
-                {CONTACT.form.submitLabel}
+                {status === "sending" ? "Sending…" : CONTACT.form.submitLabel}
               </button>
 
               {/* Status message */}
@@ -275,7 +295,22 @@ export default function ContactSection() {
                     }}
                   >
                     <FiCheckCircle size={16} />
-                    Your email client just opened — hit send from there!
+                    Message sent! I&apos;ll get back to you soon.
+                  </motion.div>
+                )}
+                {status === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="flex items-center gap-2 p-3 rounded-xl text-sm border"
+                    style={{
+                      background: "rgba(239, 68, 68, 0.08)",
+                      borderColor: "rgba(239, 68, 68, 0.2)",
+                      color: "#f87171",
+                    }}
+                  >
+                    Something went wrong. Email me directly at {PERSONAL.email}
                   </motion.div>
                 )}
               </AnimatePresence>
