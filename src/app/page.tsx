@@ -1,64 +1,95 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Navigation from "./components/Navigation";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
+import ExperienceSection from "./components/ExperienceSection";
 import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
+import HowIThinkSection from "./components/HowIThinkSection";
 import ContactSection from "./components/ContactSection";
 import Footer from "./components/Footer";
+import RecruiterModal from "./components/RecruiterModal";
+import { NAVIGATION } from "@/config/portfolio.config";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
+  const [recruiterModalOpen, setRecruiterModalOpen] = useState(false);
 
-  const scrollToSection = (sectionId: string) => {
+  const scrollToSection = useCallback((sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveSection(sectionId);
     }
-  };
+  }, []);
 
-  // Scroll detection for active section
+  // Track active section on scroll
   useEffect(() => {
+    const sectionIds = NAVIGATION.sections.map((s) => s.id);
+
     const handleScroll = () => {
-      const sections = ["home", "about", "skills", "projects", "contact"];
-      const scrollPosition = window.scrollY + 100;
+      const scrollY = window.scrollY + 100;
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetHeight = element.offsetHeight;
-
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(section);
-            break;
-          }
+      let current = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollY) {
+          current = id;
         }
       }
+      setActiveSection(current);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
-      {/* Navigation */}
-      <Navigation activeSection={activeSection} onNavigate={scrollToSection} />
+  // Close modal on Escape
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setRecruiterModalOpen(false);
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, []);
 
-      {/* Sections */}
-      <HeroSection onScrollToSection={scrollToSection} />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ContactSection />
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    document.body.style.overflow = recruiterModalOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [recruiterModalOpen]);
+
+  return (
+    <div style={{ background: "var(--bg)" }}>
+      <Navigation
+        activeSection={activeSection}
+        onNavigate={scrollToSection}
+        onRecruiterMode={() => setRecruiterModalOpen(true)}
+      />
+
+      <main>
+        <HeroSection
+          onScrollToSection={scrollToSection}
+          onRecruiterMode={() => setRecruiterModalOpen(true)}
+        />
+        <AboutSection />
+        <ExperienceSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <HowIThinkSection />
+        <ContactSection />
+      </main>
+
       <Footer />
+
+      <RecruiterModal
+        isOpen={recruiterModalOpen}
+        onClose={() => setRecruiterModalOpen(false)}
+      />
     </div>
   );
 }

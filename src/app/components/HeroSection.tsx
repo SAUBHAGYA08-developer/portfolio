@@ -1,80 +1,272 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FiDownload, FiChevronDown } from "react-icons/fi";
-import { HERO_SECTION, RESUME_URL } from "../../constants/portfolio";
+import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowRight, FiEdit3 } from "react-icons/fi";
+import { HERO, PERSONAL } from "@/config/portfolio.config";
 
-interface HeroSectionProps {
-  onScrollToSection: (sectionId: string) => void;
+function useTypewriter(
+  words: string[],
+  typingSpeed = 80,
+  deletingSpeed = 50,
+  pauseDuration = 1800
+) {
+  const [text, setText] = useState("");
+  const [wordIdx, setWordIdx] = useState(0);
+  const [phase, setPhase] = useState<"typing" | "pausing" | "deleting">(
+    "typing"
+  );
+
+  useEffect(() => {
+    const word = words[wordIdx];
+
+    if (phase === "typing") {
+      if (text.length < word.length) {
+        const t = setTimeout(
+          () => setText(word.slice(0, text.length + 1)),
+          typingSpeed
+        );
+        return () => clearTimeout(t);
+      } else {
+        const t = setTimeout(() => setPhase("deleting"), pauseDuration);
+        return () => clearTimeout(t);
+      }
+    }
+
+    if (phase === "deleting") {
+      if (text.length > 0) {
+        const t = setTimeout(
+          () => setText(text.slice(0, -1)),
+          deletingSpeed
+        );
+        return () => clearTimeout(t);
+      } else {
+        setWordIdx((prev) => (prev + 1) % words.length);
+        setPhase("typing");
+      }
+    }
+  }, [text, phase, wordIdx, words, typingSpeed, deletingSpeed, pauseDuration]);
+
+  return text;
 }
 
-export default function HeroSection({ onScrollToSection }: HeroSectionProps) {
+const socialLinks = [
+  { href: PERSONAL.github, icon: FiGithub, label: "GitHub" },
+  { href: PERSONAL.linkedin, icon: FiLinkedin, label: "LinkedIn" },
+  { href: `mailto:${PERSONAL.email}`, icon: FiMail, label: "Email" },
+  { href: PERSONAL.medium, icon: FiEdit3, label: "Medium (coming soon)", disabled: true },
+];
+
+interface HeroSectionProps {
+  onScrollToSection: (id: string) => void;
+  onRecruiterMode: () => void;
+}
+
+export default function HeroSection({
+  onScrollToSection,
+  onRecruiterMode,
+}: HeroSectionProps) {
+  const typedRole = useTypewriter(HERO.roles);
+
   return (
-    <section id="home" className="pt-20 pb-16 mt-8 px-4 sm:px-6 lg:px-8 scroll-mt-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center pt-16 px-4 sm:px-6 lg:px-8 dot-grid overflow-hidden"
+    >
+      {/* Ambient glow */}
+      <div
+        className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none opacity-10 blur-3xl"
+        style={{ background: "var(--primary)" }}
+      />
+      <div
+        className="absolute bottom-1/3 right-1/4 w-64 h-64 rounded-full pointer-events-none opacity-5 blur-3xl"
+        style={{ background: "var(--secondary)" }}
+      />
+
+      <div className="max-w-7xl mx-auto w-full py-20">
+        <div className="max-w-3xl">
+          {/* Status badge */}
+          {PERSONAL.availableForWork && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-8 border"
+              style={{
+                borderColor: "rgba(74, 222, 128, 0.3)",
+                background: "rgba(74, 222, 128, 0.08)",
+                color: "var(--available)",
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full pulse-glow"
+                style={{ background: "var(--available)" }}
+              />
+              {HERO.statusBadge}
+            </motion.div>
+          )}
+
+          {/* Greeting + Name */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="mb-8"
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
-              <span className="text-4xl font-bold text-white">{HERO_SECTION.initials}</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
-              Hi, I&apos;m{" "}
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                {HERO_SECTION.name}
-              </span>
+            <p className="text-slate-400 text-lg mb-2 font-medium">
+              {HERO.greeting}
+            </p>
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-4">
+              <span className="text-slate-100">{PERSONAL.name}</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8">
-              {HERO_SECTION.title}
-            </p>
-            <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-12">
-              {HERO_SECTION.description}
-            </p>
           </motion.div>
 
+          {/* Typing role */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-xl sm:text-2xl font-medium mb-6 min-h-[2rem]"
           >
-            <button 
-              onClick={() => onScrollToSection("projects")}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+            <span style={{ color: "var(--primary)" }}>{typedRole}</span>
+            <span
+              className="cursor-blink ml-0.5 font-light"
+              style={{ color: "var(--primary)" }}
             >
-              {HERO_SECTION.primaryButton}
+              |
+            </span>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-10"
+          >
+            {HERO.description}
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap gap-3 mb-12"
+          >
+            <button
+              onClick={() => onScrollToSection(HERO.cta.primarySection)}
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold text-white btn-primary focus-ring"
+            >
+              {HERO.cta.primary}
+              <FiArrowRight size={14} />
             </button>
-            <button 
-              onClick={() => window.open(RESUME_URL, '_blank', 'noopener,noreferrer')}
-              className="px-8 py-3 border-2 border-gray-600 text-gray-300 rounded-full font-semibold hover:bg-gray-800 transition-all duration-300"
+
+            <button
+              onClick={() =>
+                window.open(PERSONAL.resumeUrl, "_blank", "noopener,noreferrer")
+              }
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-medium btn-outline focus-ring"
             >
-              <FiDownload className="inline mr-2" size={20} />
-              {HERO_SECTION.secondaryButton}
+              <FiDownload size={14} />
+              {HERO.cta.secondary}
+            </button>
+
+            <button
+              onClick={onRecruiterMode}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 text-slate-500 hover:text-indigo-400 underline underline-offset-4 decoration-dotted"
+            >
+              {HERO.cta.recruiter}
             </button>
           </motion.div>
 
+          {/* Quick Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-12"
+          >
+            {HERO.stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="p-4 rounded-xl border glass text-center"
+              >
+                <div
+                  className="text-2xl font-bold mb-0.5"
+                  style={{ color: "var(--primary)" }}
+                >
+                  {stat.value}
+                </div>
+                <div className="text-xs text-slate-500 leading-tight">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Social Links */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-16"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="flex items-center gap-4"
           >
-            <button
-              onClick={() => onScrollToSection("about")}
-              className="animate-bounce p-2 rounded-full bg-gray-800 shadow-lg hover:shadow-xl transition-shadow"
-            >
-              <FiChevronDown
-                size={24}
-                className="text-gray-300"
-              />
-            </button>
+            {socialLinks.map(({ href, icon: Icon, label, disabled }) =>
+              disabled ? (
+                <span
+                  key={label}
+                  title="Coming Soon"
+                  className="relative p-2.5 rounded-lg border opacity-40 cursor-default"
+                  style={{ borderColor: "var(--border)", color: "var(--muted)" }}
+                  aria-label={label}
+                >
+                  <Icon size={18} />
+                  <span className="absolute -top-1.5 -right-1.5 w-2 h-2 rounded-full bg-indigo-500 border border-slate-950" />
+                </span>
+              ) : (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2.5 rounded-lg border transition-all duration-200 hover:border-indigo-500 hover:text-indigo-400 hover:bg-indigo-500/5 focus-ring"
+                  style={{ borderColor: "var(--border)", color: "var(--muted)" }}
+                  aria-label={label}
+                >
+                  <Icon size={18} />
+                </a>
+              )
+            )}
+            <span className="text-slate-700 text-sm ml-2">
+              {PERSONAL.currentRole} @ {PERSONAL.currentCompany}
+            </span>
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <button
+          onClick={() => onScrollToSection("about")}
+          className="flex flex-col items-center gap-1.5 text-slate-600 hover:text-slate-400 transition-colors group"
+        >
+          <span className="text-xs tracking-widest uppercase">scroll</span>
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-px h-8 rounded-full"
+            style={{
+              background:
+                "linear-gradient(to bottom, var(--border), transparent)",
+            }}
+          />
+        </button>
+      </motion.div>
     </section>
   );
 }

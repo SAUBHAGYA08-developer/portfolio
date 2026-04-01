@@ -1,110 +1,231 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  SiReact,
-  SiNextdotjs,
-  SiTypescript,
-  SiStrapi,
-  SiTailwindcss,
-  SiAndroid,
-  SiRedux,
+  FaJava,
+  FaDocker,
+  FaGitAlt,
+  FaAws,
+} from "react-icons/fa";
+import {
+  SiSpring,
+  SiMysql,
+  SiRedis,
   SiJenkins,
+  SiApachekafka,
+  SiAmazons3,
   SiJira,
   SiConfluence,
-  SiGit,
-  SiSpring,
-  SiAmazonredshift,
-  SiMysql,
-  SiDocker,
   SiHibernate,
-  SiAmazon,
   SiApachemaven,
-  SiRabbitmq,
-  SiRedis,
-  SiApachekafka,
-  // SiAwsamplify,
-  SiPostgresql,
+  SiGo,
 } from "react-icons/si";
+import { FiServer, FiDatabase, FiCloud, FiTool, FiCode, FiWifi, FiCpu, FiRadio } from "react-icons/fi";
+import { SiGithubcopilot, SiAnthropic, SiNewrelic, SiAmazondynamodb } from "react-icons/si";
+import { SKILLS } from "@/config/portfolio.config";
 
-import { FiMonitor } from "react-icons/fi"; // fallback icon
-import { FaJava } from "react-icons/fa";
+type IconComponent = React.ComponentType<{ size?: number; className?: string; style?: React.CSSProperties }>;
 
-import { SKILLS_SECTION } from "../../constants/portfolio";
-// Icon mapping
-const iconMap = {
-  React: SiReact,
-  Nextjs: SiNextdotjs,
-  TypeScript: SiTypescript,
-  Strapi: SiStrapi,
-  Tailwind: SiTailwindcss,
-  Mobile: SiAndroid,
-  Redux: SiRedux,
+const iconMap: Record<string, IconComponent> = {
+  Java: FaJava,
+  Go: SiGo,
+  Spring: SiSpring,
+  MySQL: SiMysql,
+  Redis: SiRedis,
+  AWS: FaAws,
+  Docker: FaDocker,
   Jenkins: SiJenkins,
+  Git: FaGitAlt,
+  Kafka: SiApachekafka,
   Jira: SiJira,
   Confluence: SiConfluence,
-  Git: SiGit,
-  Java: FaJava,
-  Spring: SiSpring,
-  Redshift: SiAmazonredshift,
-  MySQL: SiMysql,
-  PostgreSQL: SiPostgresql,
-  Docker: SiDocker,
   Hibernate: SiHibernate,
-  AWS: SiAmazon,
-  Maven: SiApachemaven,
-  RabbitMQ: SiRabbitmq,
-  Redis: SiRedis,
-  Kafka: SiApachekafka,
-  MSK: SiApachekafka, // MSK = Managed Kafka, using kafka icon
-  Lambda: FiMonitor, // No official Lambda icon in react-icons, fallback
-  SQS: FiMonitor,    // Same for SQS (AWS Simple Queue Service)
-  CloudWatch: FiMonitor,
-  S3: FiMonitor,
-  Playwright: FiMonitor, // existing fallback
+  Build: SiApachemaven,
+  Database: FiDatabase,
+  Network: FiServer,
+  Api: FiCode,
+  Socket: FiWifi,
+  Redshift: SiAmazons3,
+  Cloud: FiCloud,
+  Tool: FiTool,
+  NewRelic: SiNewrelic,
+  DynamoDB: SiAmazondynamodb,
+  Grpc: FiRadio,
+  Claude: SiAnthropic,
+  Cursor: FiCpu,
+  Copilot: SiGithubcopilot,
 };
 
+const categoryIcons: Record<string, IconComponent> = {
+  Backend: FiServer,
+  Database: FiDatabase,
+  "Cloud & Messaging": FiCloud,
+  "DevOps & Tools": FiTool,
+  "AI Tools": FiCpu,
+};
+
+const categoryColors: Record<string, string> = {
+  Backend: "#6366f1",
+  Database: "#38bdf8",
+  "Cloud & Messaging": "#a78bfa",
+  "DevOps & Tools": "#4ade80",
+  "AI Tools": "#f472b6",
+};
 
 export default function SkillsSection() {
+  const [activeCategory, setActiveCategory] = useState(
+    SKILLS.categories[0].name
+  );
+
+  const current = SKILLS.categories.find((c) => c.name === activeCategory);
+
   return (
-    <section id="skills" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800 scroll-mt-8">
+    <section
+      id="skills"
+      className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-16"
+      style={{ background: "var(--surface)" }}
+    >
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">
-            {SKILLS_SECTION.title}
+          <p
+            className="text-sm font-medium tracking-widest uppercase mb-3"
+            style={{ color: "var(--primary)" }}
+          >
+            Skills
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-3">
+            {SKILLS.title}
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
+          <p className="text-slate-400 text-sm">{SKILLS.subtitle}</p>
+          <div
+            className="w-12 h-0.5 rounded-full mt-4"
+            style={{ background: "var(--primary)" }}
+          />
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-          {SKILLS_SECTION.skills.map((skill, index) => {
-            const IconComponent = iconMap[skill.icon as keyof typeof iconMap] || FiMonitor;
-
+        {/* Category Overview Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-8"
+        >
+          {SKILLS.categories.map((cat) => {
+            const CatIcon = categoryIcons[cat.name] || FiServer;
+            const color = categoryColors[cat.name] || "var(--primary)";
+            const isActive = activeCategory === cat.name;
             return (
-              <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gray-900 p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-center"
+              <button
+                key={cat.name}
+                onClick={() => setActiveCategory(cat.name)}
+                className="p-4 rounded-xl border text-left transition-all duration-200 focus-ring"
+                style={{
+                  borderColor: isActive
+                    ? `${color}60`
+                    : "rgba(51, 65, 85, 0.6)",
+                  background: isActive
+                    ? `${color}10`
+                    : "rgba(30, 41, 59, 0.4)",
+                }}
               >
-                <IconComponent
-                  size={40}
-                  className={`mx-auto mb-3 ${skill.color}`}
+                <CatIcon
+                  size={18}
+                  className="mb-2"
+                  style={{ color: isActive ? color : "var(--muted)" }}
                 />
-                <h3 className="font-semibold text-white">
-                  {skill.name}
-                </h3>
-              </motion.div>
+                <p
+                  className="text-xs font-semibold"
+                  style={{ color: isActive ? color : "var(--muted)" }}
+                >
+                  {cat.name}
+                </p>
+                <p className="text-xs text-slate-600 mt-0.5">
+                  {cat.skills.length} skills
+                </p>
+              </button>
             );
           })}
-        </div>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <AnimatePresence mode="wait">
+          {current && (
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
+            >
+              {current.skills.map((skill, i) => {
+                const Icon = iconMap[skill.icon] || FiCode;
+                const color =
+                  categoryColors[activeCategory] || "var(--primary)";
+                return (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.04 }}
+                    className="flex flex-col items-center gap-2 p-4 rounded-xl border skill-badge text-center cursor-default group"
+                  >
+                    <div
+                      className="w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-200"
+                      style={{
+                        background: `${color}15`,
+                      }}
+                    >
+                      <Icon
+                        size={20}
+                        style={{ color }}
+                        className="group-hover:scale-110 transition-transform duration-200"
+                      />
+                    </div>
+                    <span className="text-xs font-medium text-slate-300 leading-tight text-center">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* All Skills Summary */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-12 pt-8 border-t border-slate-800"
+        >
+          <p className="text-xs text-slate-500 uppercase tracking-wider mb-4 text-center">
+            All technologies
+          </p>
+          <div className="flex flex-wrap justify-center gap-2">
+            {SKILLS.categories.flatMap((cat) =>
+              cat.skills.map((skill) => (
+                <span
+                  key={`${cat.name}-${skill.name}`}
+                  className="px-2.5 py-1 rounded-md text-xs border skill-badge"
+                  style={{ color: "var(--muted)" }}
+                >
+                  {skill.name}
+                </span>
+              ))
+            )}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

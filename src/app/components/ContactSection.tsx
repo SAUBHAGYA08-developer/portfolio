@@ -1,184 +1,288 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { SiLeetcode } from "react-icons/si";
-import { CONTACT_SECTION } from "../../constants/portfolio";
-import { useState, useRef } from "react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FiMail,
+  FiGithub,
+  FiLinkedin,
+  FiSend,
+  FiCheckCircle,
+  FiArrowUpRight,
+  FiEdit3,
+} from "react-icons/fi";
+import { CONTACT, PERSONAL } from "@/config/portfolio.config";
 
-// Icon mapping
 const iconMap = {
-  Mail: FiMail,
-  Github: FiGithub,
-  Linkedin: FiLinkedin,
-  Leetcode: SiLeetcode,   // added Leetcode icon here
+  email: FiMail,
+  github: FiGithub,
+  linkedin: FiLinkedin,
+  medium: FiEdit3,
 };
 
 export default function ContactSection() {
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "success">("idle");
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSuccess(false);
-    setError(null);
-
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      email: formData.get('email'),
-      message: formData.get('message')
-    };
-
-        try {
-      const response = await fetch('https://formspree.io/f/xnnzlgoy', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-
-
-      if (response.status === 200 || response.status === 302) {
-        if (formRef.current) {
-          formRef.current.reset();
-        }
-        setSuccess(true);
-        setError(null);
-      } else {
-        setError('Failed to send message. Please try again.');
-      }
-    } catch (error) {
-      setError('Network error. Please check your connection and try again.');
-      console.error(error);
-    }
-
-    setTimeout(() => {
-      setSuccess(false);
-      setError(null);
-    }, 3000);
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const subject = encodeURIComponent(
+      `Portfolio Contact${formData.company ? ` — ${formData.company}` : ""} from ${formData.name}`
+    );
+    const body = encodeURIComponent(
+      `Hi Saubhagya,\n\n${formData.message}\n\n---\nName: ${formData.name}\nEmail: ${formData.email}${formData.company ? `\nCompany: ${formData.company}` : ""}`
+    );
+
+    window.location.href = `mailto:${PERSONAL.email}?subject=${subject}&body=${body}`;
+
+    setStatus("success");
+    setFormData({ name: "", email: "", company: "", message: "" });
+    setTimeout(() => setStatus("idle"), 5000);
+  };
+
+  const inputClass =
+    "w-full px-4 py-3 rounded-xl border text-sm text-slate-200 placeholder-slate-600 outline-none transition-all duration-200 focus:border-indigo-500/60 focus:ring-1 focus:ring-indigo-500/20";
+  const inputStyle = {
+    background: "rgba(30, 41, 59, 0.5)",
+    borderColor: "var(--border)",
+  };
 
   return (
-    <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-800 scroll-mt-8">
-      <div className="max-w-4xl mx-auto">
+    <section
+      id="contact"
+      className="py-24 px-4 sm:px-6 lg:px-8 scroll-mt-16"
+      style={{ background: "var(--bg)" }}
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
         >
-          <h2 className="text-4xl font-bold text-white mb-4">{CONTACT_SECTION.title}</h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-8"></div>
-          <p className="text-lg text-gray-300">
-            {CONTACT_SECTION.description}
+          <p
+            className="text-sm font-medium tracking-widest uppercase mb-3"
+            style={{ color: "var(--primary)" }}
+          >
+            Contact
           </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-100 mb-3">
+            {CONTACT.title}
+          </h2>
+          <p className="text-slate-400 text-sm max-w-xl">
+            {CONTACT.description}
+          </p>
+          <div
+            className="w-12 h-0.5 rounded-full mt-4"
+            style={{ background: "var(--primary)" }}
+          />
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid md:grid-cols-2 gap-8"
-        >
-          <div className="space-y-6">
-            <h3 className="text-2xl font-semibold text-white mb-6">
-              {CONTACT_SECTION.subtitle}
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Left: Social links + info */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h3 className="text-lg font-semibold text-slate-200 mb-6">
+              {CONTACT.subtitle}
             </h3>
-            <div className="space-y-4">
-              {CONTACT_SECTION.socialLinks.map((link) => {
-                const IconComponent = iconMap[link.icon as keyof typeof iconMap];
+
+            <div className="space-y-3 mb-10">
+              {CONTACT.socialLinks.map((link) => {
+                const Icon =
+                  iconMap[link.type as keyof typeof iconMap] || FiMail;
+                const isComingSoon = link.badge === "Coming Soon";
                 return (
                   <a
                     key={link.type}
                     href={link.href}
-                    target={link.type !== "email" ? "_blank" : undefined}
-                    rel={link.type !== "email" ? "noopener noreferrer" : undefined}
-                    className="flex items-center space-x-3 text-gray-300 hover:text-blue-400 transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-4 p-4 rounded-xl border glass transition-all duration-200 group ${
+                      isComingSoon
+                        ? "opacity-60 cursor-default hover:border-slate-700"
+                        : "hover:border-indigo-500/30"
+                    }`}
+                    onClick={isComingSoon ? (e) => e.preventDefault() : undefined}
                   >
-                    <IconComponent size={20} />
-                    <span>{link.label}</span>
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ background: "rgba(99, 102, 241, 0.1)" }}
+                    >
+                      <Icon size={16} className="text-indigo-400" />
+                    </div>
+                    <span className="text-sm text-slate-400 group-hover:text-slate-200 transition-colors flex-1">
+                      {link.label}
+                    </span>
+                    {isComingSoon ? (
+                      <span className="text-xs px-2 py-0.5 rounded-full border font-medium"
+                        style={{
+                          borderColor: "rgba(99, 102, 241, 0.3)",
+                          background: "rgba(99, 102, 241, 0.08)",
+                          color: "var(--primary)",
+                        }}
+                      >
+                        Coming Soon
+                      </span>
+                    ) : (
+                      <FiArrowUpRight
+                        size={14}
+                        className="text-slate-600 group-hover:text-indigo-400 transition-colors"
+                      />
+                    )}
                   </a>
                 );
               })}
             </div>
-          </div>
 
-          <div className="bg-gray-900 p-8 rounded-xl shadow-lg">
-            <h3 className="text-xl font-semibold text-white mb-6">
-              {CONTACT_SECTION.form.title}
-            </h3>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+            {/* Resume CTA */}
+            <div
+              className="p-5 rounded-xl border"
+              style={{
+                borderColor: "rgba(99, 102, 241, 0.2)",
+                background: "rgba(99, 102, 241, 0.04)",
+              }}
+            >
+              <p className="text-sm text-slate-300 font-medium mb-1">
+                Want the full picture?
+              </p>
+              <p className="text-xs text-slate-500 mb-4">
+                Download my resume for a formatted view of my experience, skills,
+                and education.
+              </p>
+              <a
+                href={PERSONAL.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold text-white btn-primary"
+              >
+                Download Resume
+                <FiArrowUpRight size={13} />
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right: Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                    Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder={CONTACT.form.namePlaceholder}
+                    required
+                    className={inputClass}
+                    style={inputStyle}
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder={CONTACT.form.emailPlaceholder}
+                    required
+                    className={inputClass}
+                    style={inputStyle}
+                  />
+                </div>
+              </div>
+
               <div>
+                <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                  Company
+                </label>
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  required
-                  className="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  placeholder={CONTACT.form.companyPlaceholder}
+                  className={inputClass}
+                  style={inputStyle}
                 />
               </div>
+
               <div>
+                <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                  Message *
+                </label>
                 <textarea
                   name="message"
-                  rows={4}
-                  placeholder="Your Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder={CONTACT.form.messagePlaceholder}
                   required
-                  className="w-full px-4 py-3 border border-gray-600 rounded-lg bg-gray-800 text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  rows={5}
+                  className={`${inputClass} resize-none`}
+                  style={inputStyle}
                 />
               </div>
+
               <button
                 type="submit"
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                disabled={status === "success"}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white btn-primary disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none"
               >
-                {CONTACT_SECTION.form.submitButton}
+                <FiSend size={14} />
+                {CONTACT.form.submitLabel}
               </button>
+
+              {/* Status message */}
+              <AnimatePresence>
+                {status === "success" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    className="flex items-center gap-2 p-3 rounded-xl text-sm border"
+                    style={{
+                      background: "rgba(74, 222, 128, 0.08)",
+                      borderColor: "rgba(74, 222, 128, 0.2)",
+                      color: "var(--available)",
+                    }}
+                  >
+                    <FiCheckCircle size={16} />
+                    Your email client just opened — hit send from there!
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
-          </div>
-        </motion.div>
+          </motion.div>
+        </div>
       </div>
-      
-      {/* Success Toast */}
-      {success && (
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50"
-        >
-          <div className="flex items-center justify-between">
-            <p>Message sent successfully!</p>
-            <button 
-              onClick={() => setSuccess(false)}
-              className="ml-4 text-white hover:text-gray-200"
-            >
-              ×
-            </button>
-          </div>
-        </motion.div>
-      )}
-      
-      {/* Error Toast */}
-      {error && (
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-4 right-4 bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg z-50"
-        >
-          <div className="flex items-center justify-between">
-            <p>Something went wrong!</p>
-            <button 
-              onClick={() => setError(null)}
-              className="ml-4 text-white hover:text-gray-200"
-            >
-              ×
-            </button>
-          </div>
-        </motion.div>
-      )}
     </section>
   );
 }

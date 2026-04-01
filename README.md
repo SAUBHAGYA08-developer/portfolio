@@ -1,97 +1,253 @@
-# Portfolio Website
+# Saubhagya Shukla — Portfolio
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A config-driven, SEO-optimized developer portfolio built with **Next.js 15**, **Tailwind CSS v4**, and **Framer Motion**.
 
-## Getting Started
+> Built for backend engineers who want a portfolio that speaks for them — depth over design.
 
-### Contact Form Setup
+---
 
-This project uses [Formspree](https://formspree.io/) for the contact form (free tier: 50 submissions/month).
-
-To set up your own form endpoint:
-
-1. Go to [Formspree](https://formspree.io/) and create a free account
-2. Create a new form and get your endpoint URL
-3. Replace the endpoint in `src/app/components/ContactSection.tsx`:
-   ```typescript
-   const response = await fetch('YOUR_FORMSPREE_ENDPOINT', {
-   ```
-
-### Running the Development Server
-
-First, run the development server:
+## Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deployment Options
-
-### 1. Vercel (Recommended - Free)
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-**Custom Domain Setup:**
-1. Deploy to Vercel
-2. Go to your project dashboard → Settings → Domains
-3. Add your custom domain
-4. Update your domain's DNS settings with Vercel's instructions
-
-### 2. Netlify (Free)
-
-**Deploy to Netlify:**
-1. Push your code to GitHub
-2. Connect your repository to Netlify
-3. Build command: `npm run build`
-4. Publish directory: `.next`
-
-**Custom Domain Setup:**
-1. Go to Site Settings → Domain Management
-2. Add your custom domain
-3. Update DNS settings as instructed
-
-### 3. Railway (Free tier)
-
-**Deploy to Railway:**
-1. Connect your GitHub repository
-2. Railway will auto-detect Next.js
-3. Deploy automatically
-
-### 4. Self-Hosted (VPS/Dedicated Server)
-
-**Build and Deploy:**
-```bash
-# Build the project
+# Build for production
 npm run build
 
 # Start production server
 npm start
 ```
 
-**Custom Domain Setup:**
-1. Point your domain's A record to your server IP
-2. Set up Nginx/Apache as reverse proxy
-3. Configure SSL with Let's Encrypt
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## How to Customize
+
+**All content lives in a single file:**
+
+```
+src/config/portfolio.config.ts
+```
+
+Edit this file to update everything across the portfolio. No component changes needed.
+
+### What you can configure:
+
+| Export | What it controls |
+|--------|-----------------|
+| `PERSONAL` | Name, title, company, email, GitHub, LinkedIn, resume URL, availability |
+| `SEO` | Meta title, description, keywords, Open Graph image, site URL |
+| `HERO` | Greeting, typing roles, description, CTA buttons, stats, status badge |
+| `ABOUT` | Bio paragraphs, quick facts |
+| `EXPERIENCE` | Work history, achievements, tech stack per role |
+| `SKILLS` | Categorized skill groups (Backend, Database, Cloud, DevOps) |
+| `PROJECTS` | Featured work projects with impact metrics |
+| `HOW_I_THINK` | Problem approach, debugging style, architecture principles |
+| `RECRUITER_MODE` | Quick snapshot modal content (skills, achievements, snapshot) |
+| `CONTACT` | Social links, Formspree endpoint, form placeholder text |
+| `NAVIGATION` | Brand name, section list |
+| `FOOTER` | Copyright text, tagline, footer links |
+| `GITHUB_CONFIG` | GitHub username, how many repos to display |
+
+---
+
+## Environment Variables (Optional)
+
+Create a `.env.local` file in the project root:
+
+```env
+# Optional: GitHub personal access token for higher API rate limits (60 → 5000 req/hour)
+GITHUB_TOKEN=your_github_token_here
+```
+
+Without a token, the GitHub API allows 60 requests/hour per IP — more than enough for a portfolio.
+
+---
+
+## Project Structure
+
+```
+src/
+├── config/
+│   └── portfolio.config.ts     ← MASTER CONFIG (edit this)
+├── app/
+│   ├── api/
+│   │   └── github/
+│   │       └── route.ts        ← GitHub API integration
+│   ├── components/
+│   │   ├── Navigation.tsx      ← Top navbar with recruiter mode
+│   │   ├── MobileNav.tsx       ← Mobile slide-out drawer
+│   │   ├── HeroSection.tsx     ← Homepage with typing animation
+│   │   ├── AboutSection.tsx    ← Bio + quick facts
+│   │   ├── ExperienceSection.tsx ← Work history timeline
+│   │   ├── SkillsSection.tsx   ← Categorized skills with tabs
+│   │   ├── ProjectsSection.tsx ← Work projects + GitHub repos
+│   │   ├── HowIThinkSection.tsx ← Engineering philosophy
+│   │   ├── ContactSection.tsx  ← Contact form + social links
+│   │   ├── RecruiterModal.tsx  ← Recruiter quick-view modal
+│   │   └── Footer.tsx
+│   ├── globals.css             ← Global styles, CSS variables
+│   ├── layout.tsx              ← SEO metadata, fonts
+│   └── page.tsx                ← Main page (wires sections together)
+└── constants/
+    └── portfolio.ts            ← (legacy, no longer used)
+```
+
+---
+
+## Features
+
+### Config-Driven Content
+Every text, link, and data point is defined in `src/config/portfolio.config.ts`. One file to rule them all.
+
+### SEO Optimized
+- Metadata API with title, description, keywords
+- Open Graph tags for social sharing
+- Twitter card support
+- Canonical URL
+- Robots: index, follow
+
+### GitHub API Integration
+- Fetches public repos from GitHub at runtime
+- Displays in the Projects section under "GitHub Activity"
+- Cached for 1 hour via Next.js `revalidate`
+- Falls back gracefully if the API is unavailable
+- Optionally add a `GITHUB_TOKEN` env variable for higher rate limits
+
+### Recruiter Mode
+Click **"Recruiter View"** in the navbar (desktop or mobile menu) to open a modal showing:
+- Profile snapshot (role, stack, experience, location, status)
+- Top 10 skills
+- Key achievements
+- Quick links (resume, LinkedIn, email)
+
+### Typing Animation Hero
+The hero section cycles through multiple roles (Java Backend Engineer, Microservices Architect, etc.) using a custom `useTypewriter` hook.
+
+### "How I Think" Section
+Three-tab section covering:
+1. **Problem Approach** — Step-by-step breakdown of how problems are tackled
+2. **Debugging Style** — Terminal-style walkthrough of a real debugging scenario
+3. **Architecture Decisions** — 5 engineering principles with explanations
+
+### Mobile-First Design
+- Responsive at all breakpoints
+- Mobile slide-out navigation drawer
+- Touch-friendly buttons and spacing
+
+### Performance
+- First Load JS: ~166 kB (well under 200 kB target)
+- Static generation for all pages
+- Dynamic API route for GitHub (cached)
+- `display: swap` for fonts
+
+---
+
+## Updating Content — Examples
+
+### Update your availability status
+
+```ts
+// src/config/portfolio.config.ts
+export const PERSONAL = {
+  availableForWork: false, // ← change this
+  ...
+};
+```
+
+### Add a new project
+
+```ts
+export const PROJECTS = {
+  items: [
+    {
+      title: "New Project Title",
+      description: "What it does and why it matters.",
+      impact: ["Impact point 1", "Impact point 2"],
+      tech: ["Java", "Spring Boot", "AWS"],
+      category: "Microservices",  // or: Distributed Systems, Data Engineering, Integration
+      company: "Company Name",
+    },
+    // ... existing projects
+  ],
+};
+```
+
+### Add a new experience entry
+
+```ts
+export const EXPERIENCE = [
+  {
+    company: "New Company",
+    companyUrl: "https://company.com",
+    role: "Senior Backend Engineer",
+    period: "2024 — Present",
+    location: "India · Full-time",
+    description: "What you do there.",
+    achievements: [
+      "Achievement 1 with measurable impact",
+      "Achievement 2 with measurable impact",
+    ],
+    tech: ["Java", "Spring Boot", "AWS"],
+  },
+  // ... existing entries
+];
+```
+
+### Update the site URL after deployment
+
+```ts
+export const SEO = {
+  siteUrl: "https://yourname.dev",  // ← your actual domain
+  ...
+};
+```
+
+---
+
+## Deployment
+
+### Netlify (current setup)
+```bash
+# Build command
+npm run build
+
+# Publish directory
+.next
+```
+
+The `netlify.toml` is already configured. Just connect the repo to Netlify.
+
+### Vercel
+```bash
+vercel --prod
+```
+
+Vercel auto-detects Next.js. No extra config needed.
+
+---
+
+## Tech Stack
+
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Next.js | 15.x | Framework, App Router, API routes |
+| React | 19.x | UI library |
+| TypeScript | 5.x | Type safety |
+| Tailwind CSS | 4.x | Styling |
+| Framer Motion | 12.x | Animations |
+| react-icons | latest | Icon library |
+| Formspree | - | Contact form backend |
+| GitHub API | v3 | Public repo fetching |
+
+---
+
+## Contact
+
+**Saubhagya Shukla**  
+📧 shuklasaubhagya795@gmail.com  
+🔗 [LinkedIn](https://www.linkedin.com/in/saubhagya08/)  
+💻 [GitHub](https://github.com/SAUBHAGYA08-developer)
