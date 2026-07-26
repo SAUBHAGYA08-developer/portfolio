@@ -71,7 +71,7 @@ export const SEO = {
     "Event-driven Architecture",
     "Distributed Systems",
   ],
-  siteUrl: "https://yourdomain.com", // ← Replace with your live URL
+  siteUrl: "https://saubhagya-shukla.netlify.app/", // ← Replace with your live URL
   ogImage: "/og-image.png",
 };
 
