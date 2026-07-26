@@ -47,7 +47,7 @@ export const PERSONAL = {
 export const SEO = {
   title: "Saubhagya Shukla — Java & Go Backend Engineer",
   description:
-    "Java & Go backend engineer with 2+ years building 20+ scalable microservices at Truemeds. Expert in Spring Boot, Golang, AWS, Kafka, Redis. Actively seeking new backend engineering opportunities.",
+    "Java & Go backend engineer with 3+ years building 20+ scalable microservices at Truemeds. Expert in Spring Boot, Golang, AWS, Kafka, Redis. Actively seeking new backend engineering opportunities.",
   keywords: [
     "Saubhagya Shukla",
     "Java Backend Engineer",
@@ -96,7 +96,7 @@ export const HERO = {
     recruiter: "Recruiter? Start Here →",
   },
   stats: [
-    { value: "2+", label: "Years Experience" },
+    { value: "3+", label: "Years Experience" },
     { value: "20+", label: "Services Built" },
     { value: "6+", label: "AWS Services" },
     { value: "100K+", label: "Events / Day" },
@@ -117,7 +117,7 @@ export const ABOUT = {
   ],
   quickFacts: [
     { label: "Location", value: "India" },
-    { label: "Experience", value: "2+ Years" },
+    { label: "Experience", value: "3+ Years" },
     { label: "Primary Stack", value: "Java · Go · Spring Boot" },
     { label: "Domain", value: "Healthcare E-commerce" },
     { label: "Status", value: "Open to Work" },
@@ -433,7 +433,7 @@ export const RECRUITER_MODE = {
   subtitle: "Everything you need in 60 seconds",
   snapshot: [
     { label: "Current Role", value: "Software Engineer @ Truemeds" },
-    { label: "Experience", value: "2+ Years Backend Engineering" },
+    { label: "Experience", value: "3+ Years Backend Engineering" },
     {
       label: "Primary Stack",
       value: "Java · Go · Spring Boot · AWS · Kafka · Redis · New Relic",
