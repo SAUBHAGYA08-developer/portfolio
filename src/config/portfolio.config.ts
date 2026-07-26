@@ -110,7 +110,7 @@ export const HERO = {
 export const ABOUT = {
   title: "About Me",
   paragraphs: [
-    "I'm a backend engineer who enjoys building systems that are reliable, observable, and maintainable at scale. With 2+ years at Truemeds — one of India's leading online pharmacies — I've designed and shipped 20+ microservices handling real-world load: inventory assignment, dynamic pricing, notification delivery, analytics pipelines, call automation, and more.",
+    "I'm a backend engineer who enjoys building systems that are reliable, observable, and maintainable at scale. With 3+ years at Truemeds — one of India's leading online pharmacies — I've designed and shipped 20+ microservices handling real-world load: inventory assignment, dynamic pricing, notification delivery, analytics pipelines, call automation, and more.",
     "I work primarily in Java (Spring Boot) and Go (Golang). Java for the heavy ORM and enterprise service layer; Go for high-throughput, low-latency services where performance matters. I don't just write code — I think in systems. Before touching a keyboard, I'm modeling domain boundaries, mapping failure modes, and designing for observability.",
     "I also leverage AI-assisted development tools (Claude Code, Cursor AI, GitHub Copilot) to move faster without cutting corners — using them to accelerate boilerplate, explore APIs, and review edge cases, not as a crutch.",
     "Now I'm looking for a backend-heavy role where I can go deeper — bigger systems, harder problems, stronger engineering teams.",
