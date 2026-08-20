@@ -53,6 +53,22 @@ export const metadata: Metadata = {
   },
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: PERSONAL.name,
+  jobTitle: PERSONAL.title,
+  url: SEO.siteUrl,
+  email: `mailto:${PERSONAL.email}`,
+  worksFor: {
+    "@type": "Organization",
+    name: PERSONAL.currentCompany,
+  },
+  sameAs: [PERSONAL.github, PERSONAL.linkedin, PERSONAL.medium].filter(
+    Boolean
+  ),
+};
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -69,6 +85,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-950 text-slate-100`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         {children}
       </body>
     </html>
