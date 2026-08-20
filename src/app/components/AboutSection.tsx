@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { FiMapPin, FiClock, FiCode, FiZap, FiCheckCircle } from "react-icons/fi";
-import { ABOUT } from "@/config/portfolio.config";
+import { ABOUT, PERSONAL } from "@/config/portfolio.config";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Location: FiMapPin,
@@ -68,7 +68,7 @@ export default function AboutSection() {
             >
               <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Currently</p>
               <p className="text-slate-200 font-medium text-sm">
-                Software Engineer at Truemeds — building Java microservices at scale
+                {PERSONAL.currentRole} at {PERSONAL.currentCompany} — {PERSONAL.currentFocus}
               </p>
             </div>
           </motion.div>
