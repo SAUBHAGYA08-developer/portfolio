@@ -215,6 +215,7 @@ export default function HeroSection({
               disabled ? (
                 <span
                   key={label}
+                  role="img"
                   title="Coming Soon"
                   className="relative p-2.5 rounded-lg border opacity-40 cursor-default"
                   style={{ borderColor: "var(--border)", color: "var(--muted)" }}
