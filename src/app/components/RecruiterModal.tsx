@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
 import { FiX, FiArrowUpRight, FiDownload, FiCheckCircle } from "react-icons/fi";
 import { RECRUITER_MODE, PERSONAL } from "@/config/portfolio.config";
+import { usePresence } from "@/hooks/usePresence";
 
 interface RecruiterModalProps {
   isOpen: boolean;
@@ -10,26 +10,25 @@ interface RecruiterModalProps {
 }
 
 export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps) {
+  const { mounted, show } = usePresence(isOpen, 250);
+
+  if (!mounted) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
+    <>
           {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+          <div
             onClick={onClose}
-            className="fixed inset-0 z-50 modal-backdrop"
+            className={`fixed inset-0 z-50 modal-backdrop transition-opacity duration-[250ms] ${
+              show ? "opacity-100" : "opacity-0"
+            }`}
           />
 
           {/* Modal */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 250 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          <div
+            className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-[250ms] ${
+              show ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-5"
+            }`}
             style={{ pointerEvents: "none" }}
           >
             <div
@@ -168,9 +167,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
                 </div>
               </div>
             </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+          </div>
+    </>
   );
 }

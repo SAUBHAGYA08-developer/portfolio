@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FiMapPin, FiClock, FiCode, FiZap, FiCheckCircle } from "react-icons/fi";
 import { ABOUT, PERSONAL } from "@/config/portfolio.config";
+import { useReveal } from "@/hooks/useReveal";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Location: FiMapPin,
@@ -17,6 +17,11 @@ function getIcon(label: string) {
 }
 
 export default function AboutSection() {
+  const header = useReveal<HTMLDivElement>();
+  const bio = useReveal<HTMLDivElement>();
+  const facts = useReveal<HTMLDivElement>();
+  const availability = useReveal<HTMLDivElement>();
+
   return (
     <section
       id="about"
@@ -25,12 +30,9 @@ export default function AboutSection() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
+        <div
+          ref={header.ref}
+          className={`mb-16 reveal ${header.inView ? "in-view" : ""}`}
         >
           <p className="text-sm font-medium tracking-widest uppercase mb-3" style={{ color: "var(--primary)" }}>
             About
@@ -39,15 +41,13 @@ export default function AboutSection() {
             {ABOUT.title}
           </h2>
           <div className="w-12 h-0.5 rounded-full" style={{ background: "var(--primary)" }} />
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Bio */}
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+          <div
+            ref={bio.ref}
+            className={`reveal-left ${bio.inView ? "in-view" : ""}`}
           >
             <div className="space-y-5">
               {ABOUT.paragraphs.map((para, i) => (
@@ -71,14 +71,12 @@ export default function AboutSection() {
                 {PERSONAL.currentRole} at {PERSONAL.currentCompany} — {PERSONAL.currentFocus}
               </p>
             </div>
-          </motion.div>
+          </div>
 
           {/* Quick Facts */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+          <div
+            ref={facts.ref}
+            className={`reveal-right ${facts.inView ? "in-view" : ""}`}
           >
             <h3 className="text-sm font-medium uppercase tracking-widest text-slate-400 mb-6">
               Quick Facts
@@ -108,12 +106,11 @@ export default function AboutSection() {
             </div>
 
             {/* Availability */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="mt-6 p-5 rounded-xl border text-center"
+            <div
+              ref={availability.ref}
+              className={`mt-6 p-5 rounded-xl border text-center reveal-scale ${
+                availability.inView ? "in-view" : ""
+              }`}
               style={{
                 borderColor: "rgba(74, 222, 128, 0.2)",
                 background: "rgba(74, 222, 128, 0.04)",
@@ -133,8 +130,8 @@ export default function AboutSection() {
                 <br />
                 Backend-heavy, systems-focused, high-impact preferred.
               </p>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>

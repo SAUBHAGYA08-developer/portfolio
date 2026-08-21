@@ -32,7 +32,7 @@ export const PERSONAL = {
   currentCompany: "Truemeds",
   currentFocus: "building Java microservices at scale",
   yearsExperience: "3+",
-  location: "India",
+  location: "Bangalore India",
   email: "shuklasaubhagya795@gmail.com",
   github: "https://github.com/SAUBHAGYA08-developer",
   githubUsername: "SAUBHAGYA08-developer",
@@ -60,7 +60,7 @@ export const SEO = {
     "AWS Developer",
     "Kafka Developer",
     "Redis Developer",
-    "Backend Developer India",
+    "Backend Developer Bangalore",
     "Java Developer",
     "Go Developer",
     "Golang Microservices",
@@ -118,7 +118,7 @@ export const ABOUT = {
     "Now I'm looking for a backend-heavy role where I can go deeper — bigger systems, harder problems, stronger engineering teams.",
   ],
   quickFacts: [
-    { label: "Location", value: "India" },
+    { label: "Location", value: "Bangalore, India" },
     { label: "Experience", value: `${PERSONAL.yearsExperience} Years` },
     { label: "Primary Stack", value: "Java · Go · Spring Boot" },
     { label: "Domain", value: "Healthcare E-commerce" },
@@ -135,7 +135,7 @@ export const EXPERIENCE = [
     companyUrl: "https://www.truemeds.in/",
     role: "Software Engineer",
     period: "2022 — Present",
-    location: "India · Full-time",
+    location: "Bangalore, India · Full-time",
     description:
       "Backend engineer on the core platform team, designing and shipping 20+ microservices in Java and Go that power India's leading online pharmacy. End-to-end ownership from architecture to production deployment on AWS.",
     achievements: [
