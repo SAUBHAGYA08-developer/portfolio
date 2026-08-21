@@ -148,7 +148,7 @@ export default function SkillsSection() {
                 >
                   {cat.name}
                 </p>
-                <p className="text-xs text-slate-600 mt-0.5">
+                <p className="text-xs text-slate-400 mt-0.5">
                   {cat.skills.length} skills
                 </p>
               </button>
@@ -209,7 +209,7 @@ export default function SkillsSection() {
           transition={{ delay: 0.4 }}
           className="mt-12 pt-8 border-t border-slate-800"
         >
-          <p className="text-xs text-slate-500 uppercase tracking-wider mb-4 text-center">
+          <p className="text-xs text-slate-400 uppercase tracking-wider mb-4 text-center">
             All technologies
           </p>
           <div className="flex flex-wrap justify-center gap-2">

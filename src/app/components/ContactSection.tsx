@@ -153,7 +153,7 @@ export default function ContactSection() {
                     ) : (
                       <FiArrowUpRight
                         size={14}
-                        className="text-slate-600 group-hover:text-indigo-400 transition-colors"
+                        className="text-slate-400 group-hover:text-indigo-400 transition-colors"
                       />
                     )}
                   </a>
@@ -172,7 +172,7 @@ export default function ContactSection() {
               <p className="text-sm text-slate-300 font-medium mb-1">
                 Want the full picture?
               </p>
-              <p className="text-xs text-slate-500 mb-4">
+              <p className="text-xs text-slate-400 mb-4">
                 Download my resume for a formatted view of my experience, skills,
                 and education.
               </p>
@@ -204,7 +204,7 @@ export default function ContactSection() {
               <input type="hidden" name="bot-field" />
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                  <label className="block text-xs text-slate-400 mb-1.5 ml-1">
                     Name *
                   </label>
                   <input
@@ -219,7 +219,7 @@ export default function ContactSection() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                  <label className="block text-xs text-slate-400 mb-1.5 ml-1">
                     Email *
                   </label>
                   <input
@@ -236,7 +236,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                <label className="block text-xs text-slate-400 mb-1.5 ml-1">
                   Company
                 </label>
                 <input
@@ -251,7 +251,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-xs text-slate-500 mb-1.5 ml-1">
+                <label className="block text-xs text-slate-400 mb-1.5 ml-1">
                   Message *
                 </label>
                 <textarea

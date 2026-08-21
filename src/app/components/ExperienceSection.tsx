@@ -108,7 +108,7 @@ export default function ExperienceSection() {
                         <FiCalendar size={12} />
                         <span>{job.period}</span>
                       </div>
-                      <div className="flex items-center gap-1.5 text-slate-500 text-xs justify-end">
+                      <div className="flex items-center gap-1.5 text-slate-400 text-xs justify-end">
                         <FiMapPin size={11} />
                         <span>{job.location}</span>
                       </div>
@@ -122,7 +122,7 @@ export default function ExperienceSection() {
 
                   {/* Achievements */}
                   <div className="mb-6">
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-4">
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-4">
                       Key Achievements
                     </h4>
                     <ul className="space-y-3">
@@ -148,7 +148,7 @@ export default function ExperienceSection() {
 
                   {/* Tech stack */}
                   <div>
-                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                    <h4 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
                       Tech Stack
                     </h4>
                     <div className="flex flex-wrap gap-2">

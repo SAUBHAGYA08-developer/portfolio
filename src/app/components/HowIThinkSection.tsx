@@ -22,7 +22,7 @@ function TerminalView({ lines }: { lines: TerminalLine[] }) {
         <span className="w-3 h-3 rounded-full bg-red-500/80" />
         <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
         <span className="w-3 h-3 rounded-full bg-green-500/80" />
-        <span className="ml-3 text-slate-600 text-xs">debugging.sh</span>
+        <span className="ml-3 text-slate-400 text-xs">debugging.sh</span>
       </div>
       {/* Lines — use animate (not whileInView) so they fire on tab mount */}
       <div className="p-4 space-y-1.5">
@@ -170,7 +170,7 @@ export default function HowIThinkSection() {
               <div
                 className="p-6 rounded-2xl border glass"
               >
-                <p className="text-xs text-slate-500 uppercase tracking-wider mb-4">
+                <p className="text-xs text-slate-400 uppercase tracking-wider mb-4">
                   Thought process
                 </p>
                 <div className="space-y-3">
@@ -206,7 +206,7 @@ export default function HowIThinkSection() {
                         {i < arr.length - 1 && (
                           <FiChevronRight
                             size={12}
-                            className="text-slate-700 ml-auto"
+                            className="text-slate-400 ml-auto"
                           />
                         )}
                       </div>
@@ -304,7 +304,7 @@ export default function HowIThinkSection() {
                         {p.title}
                       </h4>
                     </div>
-                    <p className="text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-400 leading-relaxed">
                       {p.detail}
                     </p>
                   </motion.div>

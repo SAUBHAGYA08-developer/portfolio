@@ -108,8 +108,8 @@ export default function HeroSection({
 
           {/* Greeting + Name */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             <p className="text-slate-400 text-lg mb-2 font-medium">
@@ -122,8 +122,8 @@ export default function HeroSection({
 
           {/* Typing role */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl sm:text-2xl font-medium mb-6 min-h-[2rem]"
           >
@@ -138,8 +138,8 @@ export default function HeroSection({
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 24 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-slate-400 text-base sm:text-lg max-w-2xl leading-relaxed mb-10"
           >
@@ -173,7 +173,7 @@ export default function HeroSection({
 
             <button
               onClick={onRecruiterMode}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 text-slate-500 hover:text-indigo-400 underline underline-offset-4 decoration-dotted"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-indigo-400 underline underline-offset-4 decoration-dotted"
             >
               {HERO.cta.recruiter}
             </button>
@@ -197,7 +197,7 @@ export default function HeroSection({
                 >
                   {stat.value}
                 </div>
-                <div className="text-xs text-slate-500 leading-tight">
+                <div className="text-xs text-slate-400 leading-tight">
                   {stat.label}
                 </div>
               </div>
@@ -237,7 +237,7 @@ export default function HeroSection({
                 </a>
               )
             )}
-            <span className="text-slate-700 text-sm ml-2">
+            <span className="text-slate-400 text-sm ml-2">
               {PERSONAL.currentRole} @ {PERSONAL.currentCompany}
             </span>
           </motion.div>
@@ -253,7 +253,7 @@ export default function HeroSection({
       >
         <button
           onClick={() => onScrollToSection("about")}
-          className="flex flex-col items-center gap-1.5 text-slate-600 hover:text-slate-400 transition-colors group"
+          className="flex flex-col items-center gap-1.5 text-slate-400 hover:text-slate-400 transition-colors group"
         >
           <span className="text-xs tracking-widest uppercase">scroll</span>
           <motion.div

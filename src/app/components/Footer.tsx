@@ -18,10 +18,10 @@ export default function Footer() {
         <div className="section-divider mb-8" />
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left">
-            <p className="text-sm text-slate-500" suppressHydrationWarning>
+            <p className="text-sm text-slate-400" suppressHydrationWarning>
               {text}
             </p>
-            <p className="text-xs text-slate-700 mt-0.5">{FOOTER.tagline}</p>
+            <p className="text-xs text-slate-400 mt-0.5">{FOOTER.tagline}</p>
           </div>
 
           <div className="flex items-center gap-5">
@@ -31,7 +31,7 @@ export default function Footer() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-slate-600 hover:text-indigo-400 transition-colors"
+                className="text-xs text-slate-400 hover:text-indigo-400 transition-colors"
               >
                 {link.label}
               </a>

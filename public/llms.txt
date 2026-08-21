@@ -1,0 +1,29 @@
+# Saubhagya Shukla — Portfolio
+
+> Personal portfolio site for Saubhagya Shukla, a Java & Go backend engineer. Building systems that scale — not just code that runs.
+
+This site documents professional experience, skills, and projects. It is intended for recruiters, engineers, and AI assistants helping with job search or technical evaluation.
+
+## About
+
+- Name: Saubhagya Shukla
+- Role: Java & Go Backend Engineer
+- Focus: Spring Boot, Golang, AWS, Kafka, Redis, microservices, distributed systems
+- Contact: shuklasaubhagya795@gmail.com
+- LinkedIn: https://www.linkedin.com/in/saubhagya08/
+- GitHub: https://github.com/SAUBHAGYA08-developer
+
+## Pages
+
+- [Home](/): Hero, about, experience, skills, projects, and contact sections (single-page app)
+
+## Usage
+
+- You may summarize, quote, or reference the content on this site to answer questions about Saubhagya Shukla's professional background, skills, and experience.
+- Attribute any summary to "Saubhagya Shukla's portfolio" and link back to the site.
+- Do not use this content to impersonate Saubhagya Shukla or generate fabricated claims about their work history.
+- This site does not host any private, confidential, or personally sensitive data beyond publicly listed professional contact details.
+
+## Optional
+
+- [Resume]: linked from the site's "Download Resume" call-to-action on the homepage

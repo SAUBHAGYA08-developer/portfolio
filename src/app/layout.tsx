@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import IconProvider from "./components/IconProvider";
 import "./globals.css";
 import { SEO, PERSONAL } from "@/config/portfolio.config";
 
@@ -33,20 +34,11 @@ export const metadata: Metadata = {
     url: SEO.siteUrl,
     siteName: `${PERSONAL.name} Portfolio`,
     locale: "en_US",
-    images: [
-      {
-        url: SEO.ogImage,
-        width: 1200,
-        height: 630,
-        alt: `${PERSONAL.name} — ${PERSONAL.title}`,
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: SEO.title,
     description: SEO.description,
-    images: [SEO.ogImage],
   },
   alternates: {
     canonical: SEO.siteUrl,
@@ -92,7 +84,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
-        {children}
+        <IconProvider>{children}</IconProvider>
       </body>
     </html>
   );

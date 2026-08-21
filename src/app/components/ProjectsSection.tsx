@@ -49,7 +49,7 @@ function ProjectCard({
         >
           {project.category}
         </span>
-        <span className="text-xs text-slate-600 font-medium">
+        <span className="text-xs text-slate-400 font-medium">
           {project.company}
         </span>
       </div>
@@ -68,7 +68,7 @@ function ProjectCard({
       <div className="mb-5">
         <div className="flex items-center gap-1.5 mb-2">
           <FiTrendingUp size={12} style={{ color: "var(--available)" }} />
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
             Impact
           </span>
         </div>
@@ -127,22 +127,22 @@ function GitHubRepoCard({
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
-          <FiCode size={14} className="text-slate-500" />
+          <FiCode size={14} className="text-slate-400" />
           <span className="text-sm font-semibold text-slate-200 group-hover:text-indigo-300 transition-colors truncate">
             {repo.name}
           </span>
         </div>
         <FiArrowUpRight
           size={14}
-          className="text-slate-600 group-hover:text-indigo-400 transition-colors flex-shrink-0"
+          className="text-slate-400 group-hover:text-indigo-400 transition-colors flex-shrink-0"
         />
       </div>
 
-      <p className="text-xs text-slate-500 leading-relaxed mb-4 flex-1">
+      <p className="text-xs text-slate-400 leading-relaxed mb-4 flex-1">
         {repo.description}
       </p>
 
-      <div className="flex items-center gap-4 text-xs text-slate-600">
+      <div className="flex items-center gap-4 text-xs text-slate-400">
         {repo.language && (
           <span className="flex items-center gap-1">
             <span
@@ -237,7 +237,7 @@ export default function ProjectsSection() {
                 <h3 className="text-lg font-bold text-slate-200">
                   GitHub Activity
                 </h3>
-                <p className="text-sm text-slate-500 mt-0.5">
+                <p className="text-sm text-slate-400 mt-0.5">
                   Public repos from{" "}
                   <a
                     href={PERSONAL.github}
@@ -274,7 +274,7 @@ export default function ProjectsSection() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-slate-600 text-sm">
+              <div className="text-center py-8 text-slate-400 text-sm">
                 No public repos found — most work is in private repositories.
               </div>
             )}

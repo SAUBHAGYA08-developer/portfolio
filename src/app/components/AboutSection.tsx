@@ -66,7 +66,7 @@ export default function AboutSection() {
               className="mt-8 p-4 rounded-xl border-l-2 glass"
               style={{ borderLeftColor: "var(--primary)" }}
             >
-              <p className="text-xs text-slate-500 uppercase tracking-wider mb-1">Currently</p>
+              <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">Currently</p>
               <p className="text-slate-200 font-medium text-sm">
                 {PERSONAL.currentRole} at {PERSONAL.currentCompany} — {PERSONAL.currentFocus}
               </p>
@@ -80,7 +80,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <h3 className="text-sm font-medium uppercase tracking-widest text-slate-500 mb-6">
+            <h3 className="text-sm font-medium uppercase tracking-widest text-slate-400 mb-6">
               Quick Facts
             </h3>
 
@@ -99,7 +99,7 @@ export default function AboutSection() {
                       <Icon size={15} className="text-indigo-400" />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs text-slate-500 mb-0.5">{fact.label}</p>
+                      <p className="text-xs text-slate-400 mb-0.5">{fact.label}</p>
                       <p className="text-slate-200 text-sm font-medium">{fact.value}</p>
                     </div>
                   </div>
@@ -128,7 +128,7 @@ export default function AboutSection() {
                   Open to Work
                 </span>
               </div>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 Actively seeking backend engineering roles.
                 <br />
                 Backend-heavy, systems-focused, high-impact preferred.

@@ -63,7 +63,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
                   <h2 className="text-xl font-bold text-slate-100">
                     {RECRUITER_MODE.title}
                   </h2>
-                  <p className="text-sm text-slate-500">{RECRUITER_MODE.subtitle}</p>
+                  <p className="text-sm text-slate-400">{RECRUITER_MODE.subtitle}</p>
                 </div>
                 <button
                   onClick={onClose}
@@ -76,7 +76,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
               <div className="p-6 space-y-6">
                 {/* Snapshot */}
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
                     Profile Snapshot
                   </p>
                   <div className="grid gap-2">
@@ -89,7 +89,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
                           background: "rgba(30, 41, 59, 0.4)",
                         }}
                       >
-                        <span className="text-xs text-slate-500 w-28 flex-shrink-0">
+                        <span className="text-xs text-slate-400 w-28 flex-shrink-0">
                           {item.label}
                         </span>
                         <span className="text-sm text-slate-200 font-medium">
@@ -102,7 +102,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
 
                 {/* Top Skills */}
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
                     Core Skills
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -120,7 +120,7 @@ export default function RecruiterModal({ isOpen, onClose }: RecruiterModalProps)
 
                 {/* Key Achievements */}
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
                     Key Achievements
                   </p>
                   <ul className="space-y-3">
