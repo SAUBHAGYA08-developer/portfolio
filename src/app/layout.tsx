@@ -52,16 +52,53 @@ const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: PERSONAL.name,
+  givenName: PERSONAL.shortName,
+  familyName: "Shukla",
+  alternateName: PERSONAL.shortName,
   jobTitle: PERSONAL.title,
+  description: SEO.description,
+  disambiguatingDescription: `${PERSONAL.name}, backend software engineer at ${PERSONAL.currentCompany} in ${PERSONAL.location}, working in Java and Go.`,
+  image: `${SEO.siteUrl}opengraph-image`,
   url: SEO.siteUrl,
   email: `mailto:${PERSONAL.email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: PERSONAL.city,
+    addressCountry: "IN",
+  },
   worksFor: {
     "@type": "Organization",
     name: PERSONAL.currentCompany,
+    url: "https://www.truemeds.in/",
   },
+  knowsAbout: [
+    "Java",
+    "Go",
+    "Golang",
+    "Spring Boot",
+    "Backend Engineering",
+    "Microservices Architecture",
+    "AWS",
+    "Apache Kafka",
+    "Redis",
+    "Distributed Systems",
+    "REST API Design",
+  ],
   sameAs: [PERSONAL.github, PERSONAL.linkedin, PERSONAL.medium].filter(
     Boolean
   ),
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: `${PERSONAL.name} Portfolio`,
+  url: SEO.siteUrl,
+  description: SEO.description,
+  author: {
+    "@type": "Person",
+    name: PERSONAL.name,
+  },
 };
 
 export const viewport: Viewport = {
@@ -83,6 +120,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <IconProvider>{children}</IconProvider>
       </body>

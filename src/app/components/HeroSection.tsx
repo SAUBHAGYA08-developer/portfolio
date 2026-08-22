@@ -11,7 +11,7 @@ function useTypewriter(
   deletingSpeed = 50,
   pauseDuration = 1800
 ) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState(words[0] ?? "");
   const [wordIdx, setWordIdx] = useState(0);
   const [phase, setPhase] = useState<"typing" | "pausing" | "deleting">(
     "typing"
@@ -133,6 +133,11 @@ export default function HeroSection({
               style={{ color: "var(--primary)" }}
             >
               |
+            </span>
+            {/* Static list of all roles for search engines & screen readers —
+                the animation above only shows one role at a time visually. */}
+            <span className="sr-only">
+              {PERSONAL.name} — {HERO.roles.join(", ")}
             </span>
           </motion.div>
 
